@@ -25,6 +25,6 @@ public class OrderItemFactory {
         if (quantity <= 0) {
             throw new IllegalArgumentException("quantity must be positive");
         }
-        return new PreparedOrderItem(product.getName(), product.getPrice(), quantity);
+        return new PreparedOrderItem(product, quantity);
     }
 }

@@ -1,15 +1,15 @@
 package com.rbdip.bookstore.order;
 
-import java.math.BigDecimal;
+import com.rbdip.bookstore.product.Product;
 
-/** Снимок товара и проверенного количества для расчёта и сохранения одной позиции. */
-record PreparedOrderItem(String productName, BigDecimal productPrice, int quantity) {
+/** Товар и проверенное количество для расчёта и сохранения одной позиции. */
+record PreparedOrderItem(Product product, int quantity) {
 
     PricingCalculator.LineItem pricingLine() {
-        return new PricingCalculator.LineItem(productPrice, quantity);
+        return new PricingCalculator.LineItem(product.getPrice(), quantity);
     }
 
     OrderItem toOrderItem(Long orderId) {
-        return new OrderItem(orderId, productName, productPrice, quantity);
+        return new OrderItem(orderId, product, quantity);
     }
 }
