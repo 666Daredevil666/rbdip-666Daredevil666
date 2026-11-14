@@ -2,20 +2,20 @@ package com.rbdip.bookstore.customer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.Immutable;
 
+/** Стабильная проекция имени; запись идёт через resolve_customer в физическую таблицу customers. */
 @Entity
-@Table(name = "customers")
+@Immutable
+@Table(name = "customer_read_model")
 public class Customer {
 
     private static final int MAX_ADDRESS_LENGTH = 500;
     private static final int MAX_PHONE_LENGTH = 50;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "full_name", nullable = false)

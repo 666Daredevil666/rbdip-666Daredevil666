@@ -7,15 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CustomerRepository {
 
-    private static final String RESOLVE_CUSTOMER = """
-            INSERT INTO customers (full_name, address, phone) VALUES (?, ?, ?)
-            ON CONFLICT ON CONSTRAINT customers_contact_key
-            DO UPDATE SET full_name = EXCLUDED.full_name
-            WHERE customers.full_name = EXCLUDED.full_name
-              AND customers.address IS NOT DISTINCT FROM EXCLUDED.address
-              AND customers.phone IS NOT DISTINCT FROM EXCLUDED.phone
-            RETURNING id
-            """;
+    private static final String RESOLVE_CUSTOMER = "SELECT resolve_customer(?, ?, ?)";
 
     private final JdbcTemplate jdbcTemplate;
     private final EntityManager entityManager;
